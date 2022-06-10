@@ -4,26 +4,26 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+Django = "*"
 psycopg2 = "*"
 djangorestframework = "*"
-django-cors-headers = "*"
 django-environ = "*"
 djoser = "*"
 social-auth-app-django = "*"
 django-ckeditor = "*"
-pillow = "*"
+Pillow = "*"
 mutagen = "*"
 argon2-cffi = "*"
 stripe = "*"
 braintree = "*"
-pyjwt = "*"
+PyJWT = "==2.1.0"
 boto3 = "*"
 django-storages = "*"
-markdown = "*"
+Markdown = "*"
 gunicorn = "*"
 whitenoise = "*"
 requests = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
