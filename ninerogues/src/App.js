@@ -5,7 +5,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from './containers/Home';
 import Error404 from './containers/errors/Error404';
 
-export default function App() {
+import Signup from './containers/auth/Signup'
+import Login from './containers/auth/Login'
+import Activate from './containers/auth/Activate'
+
+function App() {
   return (
     <Provider store={store}>
       <Router>
@@ -15,8 +19,15 @@ export default function App() {
 
           <Route exact path='/' element={<Home />} />
 
+          {/* Authentication */}
+          <Route exact path='/signup' element={<Signup />} />
+          <Route exact path='/login' element={<Login />} />
+          <Route exact path='/activate/:uid/:token' element={<Activate />} />
+
         </Routes>
       </Router>
     </Provider>
   );
 }
+
+export default App
