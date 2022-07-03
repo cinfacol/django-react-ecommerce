@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { activate } from '../../redux/actions/auth'
 import { Navigate } from "react-router"
 
-import * as Loader from 'react-loader-spinner'
+import { Oval } from 'react-loader-spinner'
 
 const Activate = ({
   activate,
@@ -35,12 +35,11 @@ const Activate = ({
             <button
               className="inline-flex mt-12 items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              {/* <Loader
-                type="Oval"
+              <Oval
                 color="#fff"
                 width={20}
                 height={20}
-              /> */}
+              />
             </button> :
             <button
               onClick={activate_account}
