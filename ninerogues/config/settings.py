@@ -14,6 +14,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = True
 
+DOMAIN = os.environ.get('DOMAIN')
+
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
@@ -35,6 +37,7 @@ DJANGO_APPS = [
 PROJECT_APPS = [
     "apps.user.apps.UserConfig",
     "apps.category.apps.CategoryConfig",
+    "apps.product.apps.ProductConfig",
 ]
 ECOMMERCE_APPS = []
 THIRD_PARTY_APPS = [

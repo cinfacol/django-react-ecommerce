@@ -9,7 +9,6 @@ import { get_categories } from '../redux/actions/categories'
 import { get_products, get_filtered_products } from '../redux/actions/products'
 import ProductCard from '../components/product/ProductCard'
 import { prices } from '../helpers/fixedPrices'
-
 const sortOptions = [
   { name: 'Most Popular', href: '#', current: true },
   { name: 'Best Rating', href: '#', current: false },
@@ -82,6 +81,7 @@ const Shop = ({
     sortBy: 'created',
     order: 'desc'
   })
+
   const {
     category_id,
     price_range,
@@ -96,6 +96,7 @@ const Shop = ({
   }, [])
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
+
   const onSubmit = e => {
     e.preventDefault()
     get_filtered_products(category_id, price_range, sortBy, order)
@@ -148,6 +149,8 @@ const Shop = ({
 
   }
 
+
+
   return (
     <Layout>
       <div className="bg-white">
@@ -189,7 +192,7 @@ const Shop = ({
                     </button>
                   </div>
 
-                  {/* Mobile Filters */}
+                  {/* MOBILE FILTERS */}
                   <form onSubmit={e => onSubmit(e)} className="mt-4 border-t border-gray-200">
                     <h3 className="sr-only">Categories</h3>
                     <ul role="list" className="font-medium text-gray-900 px-2 py-3">
@@ -371,6 +374,8 @@ const Shop = ({
                     >
                       Buscar
                     </button>
+
+
                   </form>
                 </div>
               </Transition.Child>
@@ -579,7 +584,10 @@ const Shop = ({
 
                 {/* Product grid */}
                 <div className="lg:col-span-3">
+                  {/* Replace with your content */}
+
                   {products && showProducts()}
+
                 </div>
               </div>
             </section>
@@ -593,7 +601,7 @@ const Shop = ({
 const mapStateToProps = state => ({
   categories: state.Categories.categories,
   products: state.Products.products,
-  filtered_products: state.Products.filtered_products,
+  filtered_products: state.Products.filtered_products
 })
 
 export default connect(mapStateToProps, {
