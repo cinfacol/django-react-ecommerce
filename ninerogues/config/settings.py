@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = True
 
-DOMAIN = os.environ.get('DOMAIN')
+DOMAIN = os.environ.get("DOMAIN")
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -38,6 +38,7 @@ PROJECT_APPS = [
     "apps.user.apps.UserConfig",
     "apps.category.apps.CategoryConfig",
     "apps.product.apps.ProductConfig",
+    "apps.cart.apps.CartConfig",
 ]
 ECOMMERCE_APPS = []
 THIRD_PARTY_APPS = [

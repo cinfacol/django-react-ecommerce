@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from 'react'
-import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
+import { Dialog, Disclosure, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { FilterIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/react/solid'
 import { connect } from 'react-redux'
@@ -10,21 +10,21 @@ import { prices } from '../../helpers/fixedPrices'
 import Navbar from '../../components/navigation/Navbar'
 import Footer from '../../components/navigation/Footer'
 
-const sortOptions = [
+/* const sortOptions = [
   { name: 'Most Popular', href: '#', current: true },
   { name: 'Best Rating', href: '#', current: false },
   { name: 'Newest', href: '#', current: false },
   { name: 'Price: Low to High', href: '#', current: false },
   { name: 'Price: High to Low', href: '#', current: false },
-]
-const subCategories = [
+] */
+/* const subCategories = [
   { name: 'Totes', href: '#' },
   { name: 'Backpacks', href: '#' },
   { name: 'Travel Bags', href: '#' },
   { name: 'Hip Bags', href: '#' },
   { name: 'Laptop Sleeves', href: '#' },
-]
-const filters = [
+] */
+/* const filters = [
   {
     id: 'color',
     name: 'Color',
@@ -60,11 +60,11 @@ const filters = [
       { value: '40l', label: '40L', checked: true },
     ],
   },
-]
+] */
 
-function classNames(...classes) {
+/* function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
-}
+} */
 
 const Search = ({
   get_categories,
@@ -194,7 +194,7 @@ const Search = ({
                   {/* MOBILE FILTERS */}
                   <form onSubmit={e => onSubmit(e)} className="mt-4 border-t border-gray-200">
                     <h3 className="sr-only">Categories</h3>
-                    <ul role="list" className="font-medium text-gray-900 px-2 py-3">
+                    <ul className="font-medium text-gray-900 px-2 py-3">
                       {
                         categories &&
                         categories !== null &&
@@ -232,7 +232,7 @@ const Search = ({
                               </div>
                             )
 
-                            category.sub_categories.map(sub_category => {
+                            category.sub_categories.map(sub_category => (
                               result.push(
                                 <div key={sub_category.id} className='flex items-center h-5 ml-2 my-5'>
                                   <input
@@ -247,7 +247,7 @@ const Search = ({
                                   </label>
                                 </div>
                               )
-                            })
+                            ))
 
                             return result
                           }
@@ -399,7 +399,7 @@ const Search = ({
                 {/* Filters */}
                 <form onSubmit={e => onSubmit(e)} className="hidden lg:block">
                   <h3 className="sr-only">Categories</h3>
-                  <ul role="list" className="text-sm font-medium text-gray-900 space-y-4 pb-6 border-b border-gray-200">
+                  <ul className="text-sm font-medium text-gray-900 space-y-4 pb-6 border-b border-gray-200">
                     {
                       categories &&
                       categories !== null &&
@@ -432,7 +432,7 @@ const Search = ({
                               </label>
                             </div>
                           )
-                          category.sub_categories.map(sub_category => {
+                          category.sub_categories.map(sub_category => (
                             result.push(
                               <div key={sub_category.id} className='flex items-center h-5 ml-2 my-5'>
                                 <input
@@ -445,7 +445,7 @@ const Search = ({
                                 </label>
                               </div>
                             )
-                          })
+                          ))
                           return result
                         }
                       })

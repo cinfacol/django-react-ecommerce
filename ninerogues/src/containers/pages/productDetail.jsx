@@ -21,12 +21,12 @@ import {
   filter_reviews
 } from '../../redux/actions/reviews'; */
 import { Oval } from "react-loader-spinner";
-/* import {
+import {
   get_items,
   add_item,
   get_total,
   get_item_total
-} from "../../redux/actions/cart"; */
+} from "../../redux/actions/cart";
 import { useEffect, useState } from "react";
 import ImageGallery from "../../components/product/ImageGallery";
 import WishlistHeart from "../../components/product/WishlistHeart";
@@ -38,10 +38,10 @@ const ProductDetail = ({
   get_product,
   get_related_products,
   product,
-  /* get_items,
+  get_items,
   add_item,
   get_total,
-  get_item_total, */
+  get_item_total,
   /* add_wishlist_item,
   get_wishlist_items,
   get_wishlist_item_total, */
@@ -62,7 +62,7 @@ const ProductDetail = ({
 
   const navigate = useNavigate();
 
-  /* const addToCart = async () => {
+  const addToCart = async () => {
     if (product && product !== null && product !== undefined && product.quantity > 0) {
       setLoading(true)
       await add_item(product);
@@ -72,7 +72,7 @@ const ProductDetail = ({
       setLoading(false)
       navigate('/cart')
     }
-  } */
+  }
 
   /* const addToWishlist = async () => {
     if (isAuthenticated) {
@@ -262,7 +262,7 @@ const ProductDetail = ({
                       height={20} />
                   </button> :
                     <button
-                      onClick=""
+                      onClick={addToCart}
                       className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full">
                       Agregar al Carrito
                     </button>}
@@ -446,11 +446,11 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   get_product,
   get_related_products,
-  /* get_items,
+  get_items,
   add_item,
   get_total,
   get_item_total,
-  add_wishlist_item,
+  /* add_wishlist_item,
   get_wishlist_items,
   get_wishlist_item_total,
   remove_wishlist_item,

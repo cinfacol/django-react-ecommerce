@@ -5,6 +5,7 @@ from django.contrib.auth.models import (
     BaseUserManager,
 )
 import os
+from apps.cart.models import Cart
 
 
 class UserAccountManager(BaseUserManager):
@@ -17,6 +18,9 @@ class UserAccountManager(BaseUserManager):
 
         user.set_password(password)
         user.save()
+
+        shopping_cart = Cart.objects.create(user=user)
+        shopping_cart.save()
 
         return user
 
