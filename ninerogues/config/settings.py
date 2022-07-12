@@ -39,6 +39,7 @@ PROJECT_APPS = [
     "apps.category.apps.CategoryConfig",
     "apps.product.apps.ProductConfig",
     "apps.cart.apps.CartConfig",
+    "apps.shipping.apps.ShippingConfig",
 ]
 ECOMMERCE_APPS = []
 THIRD_PARTY_APPS = [
