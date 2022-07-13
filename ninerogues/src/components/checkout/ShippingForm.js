@@ -1,4 +1,4 @@
-import { QuestionMarkCircleIcon, SortAscendingIcon, UsersIcon } from '@heroicons/react/solid'
+import { QuestionMarkCircleIcon } from '@heroicons/react/solid'
 import { TicketIcon } from '@heroicons/react/outline'
 import { Fragment } from 'react'
 const ShippingForm = ({
@@ -135,9 +135,6 @@ const ShippingForm = ({
               <dd className="text-base font-medium text-gray-900">${total_amount}</dd>
             </div>
         }
-
-
-
       </dl>
 
       <form onSubmit={e => buy(e)}>

@@ -40,6 +40,8 @@ PROJECT_APPS = [
     "apps.product.apps.ProductConfig",
     "apps.cart.apps.CartConfig",
     "apps.shipping.apps.ShippingConfig",
+    "apps.orders.apps.OrdersConfig",
+    "apps.payment.apps.PaymentConfig",
 ]
 ECOMMERCE_APPS = []
 THIRD_PARTY_APPS = [
@@ -202,6 +204,11 @@ DJOSER = {
         "user_delete": "djoser.serializers.UserDeleteSerializer",
     },
 }
+
+BT_ENVIRONMENT = os.environ.get("BT_ENVIRONMENT")
+BT_MERCHANT_ID = os.environ.get("BT_MERCHANT_ID")
+BT_PUBLIC_KEY = os.environ.get("BT_PUBLIC_KEY")
+BT_PRIVATE_KEY = os.environ.get("BT_PRIVATE_KEY")
 
 AUTH_USER_MODEL = "user.UserAccount"
 
