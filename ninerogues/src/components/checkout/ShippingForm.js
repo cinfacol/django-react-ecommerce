@@ -1,6 +1,7 @@
 import { QuestionMarkCircleIcon } from '@heroicons/react/solid'
 import { TicketIcon } from '@heroicons/react/outline'
 import { Fragment } from 'react'
+
 const ShippingForm = ({
   full_name,
   address_line_1,

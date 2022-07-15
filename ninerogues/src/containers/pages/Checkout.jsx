@@ -2,7 +2,6 @@ import Layout from '../../hocs/Layout'
 import { Navigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { QuestionMarkCircleIcon } from '@heroicons/react/solid'
 import CartItem from '../../components/cart/CartItem'
 import { setAlert } from '../../redux/actions/alert'
 import { update_item, remove_item } from '../../redux/actions/cart'
@@ -153,6 +152,10 @@ const Checkout = ({
     return (
       <div className='mb-5'>
         {
+          shipping &&
+          shipping !== null &&
+          shipping !== undefined &&
+          shipping.length !== 0 &&
           shipping.map((shipping_option, index) => (
             <div key={index}>
               <input
@@ -170,7 +173,6 @@ const Checkout = ({
         }
       </div>
     );
-
   };
 
   const renderPaymentInfo = () => {

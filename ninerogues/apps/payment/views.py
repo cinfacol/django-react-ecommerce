@@ -39,7 +39,7 @@ class GetPaymentTotalView(APIView):
     def get(self, request, format=None):
         user = self.request.user
 
-        tax = 0.18
+        tax = 0.16
 
         shipping_id = request.query_params.get("shipping_id")
         shipping_id = str(shipping_id)
@@ -157,7 +157,7 @@ class ProcessPaymentView(APIView):
         user = self.request.user
         data = self.request.data
 
-        tax = 0.18
+        tax = 0.16
 
         nonce = data["nonce"]
         shipping_id = str(data["shipping_id"])
