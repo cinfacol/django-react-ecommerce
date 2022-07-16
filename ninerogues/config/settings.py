@@ -42,6 +42,7 @@ PROJECT_APPS = [
     "apps.shipping.apps.ShippingConfig",
     "apps.orders.apps.OrdersConfig",
     "apps.payment.apps.PaymentConfig",
+    "apps.coupons.apps.CouponsConfig",
 ]
 ECOMMERCE_APPS = []
 THIRD_PARTY_APPS = [

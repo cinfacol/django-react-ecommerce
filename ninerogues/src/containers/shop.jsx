@@ -303,9 +303,6 @@ const Shop = ({
                                 }
                               </div>
                             </Disclosure.Panel>
-
-
-
                           </h3>
                         </>
                       )}
@@ -507,9 +504,6 @@ const Shop = ({
                               }
                             </div>
                           </Disclosure.Panel>
-
-
-
                         </h3>
                       </>
                     )}

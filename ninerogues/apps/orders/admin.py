@@ -33,6 +33,8 @@ class OrderItemAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "name",
+        "product",
+        "order",
         "price",
         "count",
     )

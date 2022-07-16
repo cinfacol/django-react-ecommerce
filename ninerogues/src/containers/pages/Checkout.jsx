@@ -1,12 +1,13 @@
-import Layout from '../../hocs/Layout'
-import { Navigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import CartItem from '../../components/cart/CartItem'
-import { setAlert } from '../../redux/actions/alert'
-import { update_item, remove_item } from '../../redux/actions/cart'
-import { useState, useEffect } from 'react'
-import { get_shipping_options } from '../../redux/actions/shipping'
+import Layout from '../../hocs/Layout';
+import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import CartItem from '../../components/cart/CartItem';
+import { setAlert } from '../../redux/actions/alert';
+import { update_item, remove_item } from '../../redux/actions/cart';
+import { useState, useEffect } from 'react';
+import { get_shipping_options } from '../../redux/actions/shipping';
+import { check_coupon } from '../../redux/actions/coupons';
 
 import {
   refresh
@@ -20,8 +21,8 @@ import {
 
 import DropIn from 'braintree-web-drop-in-react';
 import { Oval } from 'react-loader-spinner';
-import { countries } from '../../helpers/fixedCountries'
-import ShippingForm from '../../components/checkout/ShippingForm'
+import { countries } from '../../helpers/fixedCountries';
+import ShippingForm from '../../components/checkout/ShippingForm';
 
 const Checkout = ({
   isAuthenticated,
@@ -41,13 +42,13 @@ const Checkout = ({
   made_payment,
   loading,
   original_price,
-  // total_after_coupon,
+  total_after_coupon,
   total_amount,
   total_compare_amount,
   estimated_tax,
   shipping_cost,
-  // check_coupon,
-  // coupon
+  check_coupon,
+  coupon
 }) => {
 
   const [formData, setFormData] = useState({
@@ -80,25 +81,47 @@ const Checkout = ({
     shipping_id,
   } = formData;
 
+  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+
   const buy = async e => {
     e.preventDefault();
     let nonce = await data.instance.requestPaymentMethod();
-    process_payment(
-      nonce,
-      shipping_id,
-      // coupon.name,
-      full_name,
-      address_line_1,
-      address_line_2,
-      city,
-      state_province_region,
-      postal_zip_code,
-      country_region,
-      telephone_number
-    );
+    if (coupon && coupon !== null && coupon !== undefined) {
+      process_payment(
+        nonce,
+        shipping_id,
+        coupon.name,
+        full_name,
+        address_line_1,
+        address_line_2,
+        city,
+        state_province_region,
+        postal_zip_code,
+        country_region,
+        telephone_number
+      );
+    } else {
+      process_payment(
+        nonce,
+        shipping_id,
+        '',
+        full_name,
+        address_line_1,
+        address_line_2,
+        city,
+        state_province_region,
+        postal_zip_code,
+        country_region,
+        telephone_number
+      );
+    }
   }
 
-  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const apply_coupon = async e => {
+    e.preventDefault();
+
+    check_coupon(coupon_name);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -110,8 +133,11 @@ const Checkout = ({
   }, [user]);
 
   useEffect(() => {
-    get_payment_total(shipping_id, '');
-  }, [shipping_id]);
+    if (coupon && coupon !== null && coupon !== undefined)
+      get_payment_total(shipping_id, coupon.name);
+    else
+      get_payment_total(shipping_id, 'default');
+  }, [shipping_id, coupon]);
 
   const [render, setRender] = useState(false);
 
@@ -263,16 +289,16 @@ const Checkout = ({
               user={user}
               renderShipping={renderShipping}
               total_amount={total_amount}
-              // total_after_coupon={total_after_coupon}
+              total_after_coupon={total_after_coupon}
               total_compare_amount={total_compare_amount}
               estimated_tax={estimated_tax}
               shipping_cost={shipping_cost}
               shipping_id={shipping_id}
               shipping={shipping}
               renderPaymentInfo={renderPaymentInfo}
-            // coupon={coupon}
-            // apply_coupon={apply_coupon}
-            // coupon_name={coupon_name}
+              coupon={coupon}
+              apply_coupon={apply_coupon}
+              coupon_name={coupon_name}
             />
           </div>
         </div>
@@ -291,12 +317,12 @@ const mapStateToProps = state => ({
   made_payment: state.Payment.made_payment,
   loading: state.Payment.loading,
   original_price: state.Payment.original_price,
-  // total_after_coupon: state.Payment.total_after_coupon,
+  total_after_coupon: state.Payment.total_after_coupon,
   total_amount: state.Payment.total_amount,
   total_compare_amount: state.Payment.total_compare_amount,
   estimated_tax: state.Payment.estimated_tax,
   shipping_cost: state.Payment.shipping_cost,
-  // coupon: state.Coupons.coupon
+  coupon: state.Coupons.coupon
 })
 
 export default connect(mapStateToProps, {
@@ -308,4 +334,5 @@ export default connect(mapStateToProps, {
   get_payment_total,
   get_client_token,
   process_payment,
+  check_coupon,
 })(Checkout)

@@ -143,7 +143,6 @@ const Cart = ({
 
     }
   }
-
   return (
     <Layout>
       <div className="bg-white">

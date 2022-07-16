@@ -63,6 +63,10 @@ class ListOrderDetailView(APIView):
                 for order_item in order_items:
                     sub_item = {}
 
+                    sub_item["id"] = order_item.product.id
+                    sub_item["description"] = order_item.product.description
+                    sub_item["price"] = order_item.product.price
+                    sub_item["compare_price"] = order_item.product.compare_price
                     sub_item["name"] = order_item.name
                     sub_item["price"] = order_item.price
                     sub_item["count"] = order_item.count
