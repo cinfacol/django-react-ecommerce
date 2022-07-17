@@ -16,6 +16,7 @@ urlpatterns = [
     path("api/orders/", include("apps.orders.urls")),
     path("api/payment/", include("apps.payment.urls")),
     path("api/coupons/", include("apps.coupons.urls")),
+    path("api/profile/", include("apps.user_profile.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [re_path(r"^.*", TemplateView.as_view(template_name="index.html"))]

@@ -11,6 +11,10 @@ import {
   get_item_total
 } from "../redux/actions/cart";
 
+import {
+  get_user_profile
+} from "../redux/actions/profile";
+
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Navbar from '../components/navigation/Navbar';
@@ -25,6 +29,7 @@ const Layout = (props) => {
     props.get_items()
     props.get_total()
     props.get_item_total()
+    props.get_user_profile()
   }, []);
 
   return (
@@ -44,4 +49,5 @@ export default connect(null, {
   get_items,
   get_total,
   get_item_total,
+  get_user_profile
 })(Layout)

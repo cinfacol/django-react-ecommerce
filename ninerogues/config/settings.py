@@ -36,6 +36,9 @@ DJANGO_APPS = [
 
 PROJECT_APPS = [
     "apps.user.apps.UserConfig",
+    "apps.user_profile.apps.UserProfileConfig",
+]
+ECOMMERCE_APPS = [
     "apps.category.apps.CategoryConfig",
     "apps.product.apps.ProductConfig",
     "apps.cart.apps.CartConfig",
@@ -44,7 +47,6 @@ PROJECT_APPS = [
     "apps.payment.apps.PaymentConfig",
     "apps.coupons.apps.CouponsConfig",
 ]
-ECOMMERCE_APPS = []
 THIRD_PARTY_APPS = [
     "corsheaders",
     "rest_framework",
@@ -63,10 +65,10 @@ CKEDITOR_CONFIGS = {"default": {"toolbar": "full", "autoParagraph": False}}
 CKEDITOR_UPLOAD_PATH = "/media/"
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",

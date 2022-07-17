@@ -49,7 +49,7 @@ function App() {
           <Route exact path='/dashboard' element={<Dashboard />} />
           <Route exact path='/dashboard/payments' element={<DashboardPayments />} />
           <Route exact path='/dashboard/payment/:transaction_id' element={<DashboardPaymentDetail />} />
-          {/* <Route exact path='/dashboard/profile' element={<DashboardProfile />} /> */}
+          <Route exact path='/dashboard/profile' element={<DashboardProfile />} />
 
 
         </Routes>

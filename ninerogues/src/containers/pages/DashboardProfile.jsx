@@ -1,4 +1,3 @@
-
 import { connect } from 'react-redux'
 import { list_orders } from '../../redux/actions/orders'
 import {
@@ -11,7 +10,6 @@ import { Navigate } from 'react-router';
 import DashboardLink from '../../components/dashboard/DashboardLink';
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { toast } from 'react-toastify'
 import {
   BellIcon,
   CalendarIcon,
@@ -27,7 +25,7 @@ import {
 import { SearchIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom';
 import { countries } from '../../helpers/fixedCountries';
-// import { update_user_profile } from '../../redux/actions/profile';
+import { update_user_profile } from '../../redux/actions/profile';
 import { Oval } from 'react-loader-spinner';
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -68,7 +66,7 @@ const DashboardProfile = ({
     state_province_region: '',
     zipcode: '',
     phone: '',
-    country_region: 'Canada'
+    country_region: 'Colombia'
   });
 
   const {
@@ -301,9 +299,10 @@ const DashboardProfile = ({
                         <input
                           type="text"
                           name='address_line_1'
-                          placeholder={`${profile.address_line_1}`}
+                          placeholder={`${profile && profile.address_line_1}`}
                           onChange={e => onChange(e)}
                           value={address_line_1}
+                          required
                           className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-md sm:text-sm border-gray-500"
                         />
                       </div>
@@ -320,7 +319,7 @@ const DashboardProfile = ({
                         <input
                           type="text"
                           name='address_line_2'
-                          placeholder={`${profile.address_line_2}`}
+                          placeholder={`${profile && profile.address_line_2}`}
                           onChange={e => onChange(e)}
                           value={address_line_2}
                           className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-md sm:text-sm border-gray-500"
@@ -339,9 +338,10 @@ const DashboardProfile = ({
                         <input
                           type="text"
                           name='city'
-                          placeholder={`${profile.city}`}
+                          placeholder={`${profile && profile.city}`}
                           onChange={e => onChange(e)}
                           value={city}
+                          required
                           className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-md sm:text-sm border-gray-500"
                         />
                       </div>
@@ -358,9 +358,10 @@ const DashboardProfile = ({
                         <input
                           type="text"
                           name='state_province_region'
-                          placeholder={`${profile.state_province_region}`}
+                          placeholder={`${profile && profile.state_province_region}`}
                           onChange={e => onChange(e)}
                           value={state_province_region}
+                          required
                           className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-md sm:text-sm border-gray-500"
                         />
                       </div>
@@ -377,9 +378,10 @@ const DashboardProfile = ({
                         <input
                           type="text"
                           name='zipcode'
-                          placeholder={`${profile.zipcode}`}
+                          placeholder={`${profile && profile.zipcode}`}
                           onChange={e => onChange(e)}
                           value={zipcode}
+                          required
                           className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-md sm:text-sm border-gray-500"
                         />
                       </div>
@@ -396,9 +398,10 @@ const DashboardProfile = ({
                         <input
                           type="text"
                           name='phone'
-                          placeholder={`${profile.phone}`}
+                          placeholder={`${profile && profile.phone}`}
                           onChange={e => onChange(e)}
                           value={phone}
+                          required
                           className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-md sm:text-sm border-gray-500"
                         />
                       </div>
@@ -462,5 +465,5 @@ export default connect(mapStateToProps, {
   get_items,
   get_total,
   get_item_total,
-  // update_user_profile
+  update_user_profile
 })(DashboardProfile)
