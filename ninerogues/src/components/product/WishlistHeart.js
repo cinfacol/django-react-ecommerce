@@ -1,11 +1,8 @@
 const WishlistHeart = ({
-
     addToWishlist,
     product,
     wishlist
 }) => {
-
-
     const renderWishlistHeart = () => {
         let selected = false;
 

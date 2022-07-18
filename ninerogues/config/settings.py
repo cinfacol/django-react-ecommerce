@@ -46,6 +46,8 @@ ECOMMERCE_APPS = [
     "apps.orders.apps.OrdersConfig",
     "apps.payment.apps.PaymentConfig",
     "apps.coupons.apps.CouponsConfig",
+    "apps.wishlist.apps.WishlistConfig",
+    "apps.reviews.apps.ReviewsConfig",
 ]
 THIRD_PARTY_APPS = [
     "corsheaders",

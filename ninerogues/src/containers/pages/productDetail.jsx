@@ -2,24 +2,24 @@ import Layout from "../../hocs/Layout"
 import { useParams } from 'react-router'
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-/* import { 
-  add_wishlist_item, 
-  get_wishlist_items, 
-  get_wishlist_item_total ,
+/* import {
+  add_wishlist_item,
+  get_wishlist_items,
+  get_wishlist_item_total,
   remove_wishlist_item
 } from '../../redux/actions/wishlist'; */
 import {
   get_product,
   get_related_products
 } from "../../redux/actions/products";
-/* import {
+import {
   get_reviews,
   get_review,
   create_review,
   update_review,
   delete_review,
   filter_reviews
-} from '../../redux/actions/reviews'; */
+} from '../../redux/actions/reviews';
 import { Oval } from "react-loader-spinner";
 import {
   get_items,
@@ -29,12 +29,13 @@ import {
 } from "../../redux/actions/cart";
 import { useEffect, useState } from "react";
 import ImageGallery from "../../components/product/ImageGallery";
-import WishlistHeart from "../../components/product/WishlistHeart";
+// import WishlistHeart from "../../components/product/WishlistHeart";
 import { Navigate } from "react-router";
 
-// import Stars from '../../components/product/Stars'
+import Stars from '../../components/product/Stars'
 
 const ProductDetail = ({
+  isAuthenticated,
   get_product,
   get_related_products,
   product,
@@ -44,10 +45,9 @@ const ProductDetail = ({
   get_item_total,
   /* add_wishlist_item,
   get_wishlist_items,
-  get_wishlist_item_total, */
-  isAuthenticated,
+  get_wishlist_item_total,
   remove_wishlist_item,
-  wishlist,
+  wishlist, */
   get_reviews,
   get_review,
   create_review,
@@ -123,26 +123,26 @@ const ProductDetail = ({
     get_wishlist_item_total() */
   }, [])
 
-  /* useEffect(() => {
+  useEffect(() => {
     get_reviews(productId);
   }, [productId]);
 
   useEffect(() => {
     get_review(productId);
-  }, [productId]); */
+  }, [productId]);
 
   // const [rating, setRating] = useState(5.0);
 
-  /* const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     comment: '',
     rating: '',
   })
 
   const { comment, rating } = formData
 
-  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value }) */
+  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
 
-  /* const leaveReview = e => {
+  const leaveReview = e => {
     e.preventDefault()
     if (rating !== null)
       create_review(productId, rating, comment);
@@ -173,7 +173,7 @@ const ProductDetail = ({
   const getReviews = () => {
     get_reviews(productId);
   };
- */
+
   return (
     <Layout>
       <div className="bg-white">
@@ -254,36 +254,38 @@ const ProductDetail = ({
                 </p>
 
                 <div className="mt-4 flex sm:flex-col1">
-                  {loading ? <button
-                    className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full">
-                    <Oval
-                      color="#fff"
-                      width={20}
-                      height={20} />
-                  </button> :
+                  {loading ?
+                    <button
+                      className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full">
+                      <Oval
+                        color="#fff"
+                        width={20}
+                        height={20} />
+                    </button>
+                    :
                     <button
                       onClick={addToCart}
                       className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full">
                       Agregar al Carrito
-                    </button>}
+                    </button>
+                  }
 
-                  <WishlistHeart
+                  {/* <WishlistHeart
                     product={product}
                     wishlist={wishlist}
-                  // addToWishlist={addToWishlist}
-                  />
+                    addToWishlist={addToWishlist}
+                  /> */}
 
                 </div>
               </div>
             </div>
-            {/* <section className='my-5 max-w-7xl'>
+            <section className='my-5 max-w-7xl'>
               <div className="grid grid-cols-5">
                 <div className="col-span-2">
                   <div>
-
                     <button
                       className='btn btn-primary btn-sm mb-3 ml-6 mt-2 font-sofiapro-light'
-                      onClick=""
+                      onClick={getReviews}
                     >
                       Mostrar todas
                     </button>
@@ -324,11 +326,13 @@ const ProductDetail = ({
                     </div>
                   </div>
                   {
-                    review && isAuthenticated ?
+                    isAuthenticated &&
+                      review &&
+                      review.id ?
                       <form onSubmit={e => updateReview(e)}>
                         <div>
                           <label htmlFor="comment" className="block text-sm font-medium text-gray-700">
-                            Add your review
+                            Edit your review
                           </label>
                           <div className="mt-1">
                             <textarea
@@ -340,7 +344,7 @@ const ProductDetail = ({
                               onChange={e => onChange(e)}
                               placeholder={review.comment}
                               className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                              defaultValue={''}
+                            // defaultValue={''}
                             />
                           </div>
                         </div>
@@ -364,9 +368,7 @@ const ProductDetail = ({
                           Update
                         </button>
                       </form> :
-
                       <form onSubmit={e => leaveReview(e)}>
-
                         <div>
                           <label htmlFor="comment" className="block text-sm font-medium text-gray-700">
                             Add your review
@@ -380,7 +382,7 @@ const ProductDetail = ({
                               value={comment}
                               onChange={e => onChange(e)}
                               className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                              defaultValue={''}
+                            // defaultValue={''}
                             />
                           </div>
                         </div>
@@ -408,7 +410,7 @@ const ProductDetail = ({
                 </div>
                 <div className="col-span-3">
                   {reviews && reviews.map((review, index) => (
-                    <>
+                    <div key={index}>
                       <div className="flex">
                         <div className="mx-4 flex-shrink-0">
                           <span className="inline-block h-10 w-10 rounded-full overflow-hidden bg-gray-100">
@@ -425,22 +427,24 @@ const ProductDetail = ({
                           </p>
                         </div>
                       </div>
-                    </>
+                    </div>
                   ))}
                 </div>
-
               </div>
-            </section> */}
+            </section>
           </div>
         </div>
-      </div>
-    </Layout>
+      </div >
+    </Layout >
   )
 }
 
 const mapStateToProps = state => ({
   product: state.Products.product,
   isAuthenticated: state.Auth.isAuthenticated,
+  // wishlist: state.Wishlist.wishlist,
+  review: state.Reviews.review,
+  reviews: state.Reviews.reviews
 })
 
 export default connect(mapStateToProps, {
@@ -453,11 +457,11 @@ export default connect(mapStateToProps, {
   /* add_wishlist_item,
   get_wishlist_items,
   get_wishlist_item_total,
-  remove_wishlist_item,
+  remove_wishlist_item, */
   get_reviews,
   get_review,
   create_review,
   update_review,
   delete_review,
-  filter_reviews */
+  filter_reviews
 })(ProductDetail)

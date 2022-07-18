@@ -418,7 +418,7 @@ const DashboardProfile = ({
                         name='country_region'
                         onChange={e => onChange(e)}
                       >
-                        <option value={country_region}>{profile.country_region}</option>
+                        <option value={country_region}>{profile && profile.country_region}</option>
                         {
                           countries && countries.map((country, index) => (
                             <option key={index} value={country.name}>{country.name}</option>
